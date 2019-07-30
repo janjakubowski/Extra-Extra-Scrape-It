@@ -1,0 +1,37 @@
+<div class="news">
+
+	<div class="container">
+		<div>
+			<h1>Extra! Extra! Read All About It</h1>
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-6 col-box">
+				<h3>New News</h3>
+
+				<ul>
+				{{#each article}}
+					{{#unless saved}}
+						<li>
+							{{title}}
+
+							<button class="save-it btn-success btn-sm" data-id="{{id}}">
+									Save
+							</button>
+
+							<button class="delete btn-warning btn-sm" data-name="{{burger_name}}">
+									Delete
+							</button>
+						</li>
+
+					{{/unless}}
+				{{/each}}
+				</ul>
+			</div>
+			
+		</div>
+
+	</div>
+		
+</div>
