@@ -12,7 +12,7 @@
 	</div>
 </nav>
 <div class="jumbotron text-center">
-	<div class="messages">
+	<div class="display">
 
 	</div>
 	<div class="background">
@@ -25,15 +25,41 @@
 		<h2>Fox Business Network</h2>
 	</div>
 </div>
-<div class="container-fluid articles-container">
 
-</div>
-<footer class="footer">
+<div class="news">
+
 	<div class="container">
-		<p>Extra! Extra! Read all the financial news that's fit to print</p>
-	</div>
-</footer>
+		<div>
+			<h1>Extra! Extra! Read All About It</h1>
+		</div>
 
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="../../assets/js/index.js"></script>
+		<div class="row">
+
+			<div class="col-sm-6 col-box">
+				<h3>New News</h3>
+
+				<ul>
+				{{#each article}}
+					{{#unless saved}}
+						<li>
+							{{title}}
+
+							<button class="save-it btn-success btn-sm" data-id="{{id}}">
+									Save
+							</button>
+
+							<button class="delete btn-warning btn-sm" data-name="{{burger_name}}">
+									Delete
+							</button>
+						</li>
+
+					{{/unless}}
+				{{/each}}
+				</ul>
+			</div>
+			
+		</div>
+
+	</div>
+		
+</div>
