@@ -1,6 +1,5 @@
-// const scrapeFBN = require("../scripts/scrapeFBN");
+const formatDate = require("../scripts/formatDate")
 const Note = require("../models/Note");
-const formatDate = require("../")
 
 module.exports = {
 

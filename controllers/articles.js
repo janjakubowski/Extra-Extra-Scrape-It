@@ -1,8 +1,8 @@
 
 const scrapeCNBC = require("../scripts/scrapeCNBC");
-// const scrapeFBN = require("../scripts/scrapeFBN");
+const scrapeFBN = require("../scripts/scrapeFBN");
+const formatDate = require("../scripts/formatDate")
 const Article = require("../models/Article");
-const formatDate = require("../")
 
 module.exports = {
     
