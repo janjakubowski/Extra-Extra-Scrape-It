@@ -1,4 +1,4 @@
-module.exports = (today) => {
+module.exports = (formatDate) => {
     const date = new Date();
     let today = "";
 

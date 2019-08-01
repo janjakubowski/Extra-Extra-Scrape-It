@@ -9,7 +9,7 @@ var NoteSchema = new Schema({
   date: {
     type: String
   },
-  note: {
+  message: {
     type: String
 });
 

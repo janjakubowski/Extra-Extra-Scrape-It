@@ -1,14 +1,15 @@
 
 const scrapeCNBC = require("../scripts/scrapeCNBC");
-const scrapeFBN = require("../scripts/scrapeFBN");
+// const scrapeFBN = require("../scripts/scrapeFBN");
 const Article = require("../models/Article");
+const formatDate = require("../")
 
 module.exports = {
     
     getCNBC: function(callback) {
         scrapeCNBC(articles => {
             articles.array.forEach(element => {
-                element.date = today();
+                element.date = formatDate();
                 element.saved = false;
             });
             Article.collection.insertMany(articles, {ordered:false}, 
@@ -19,7 +20,7 @@ module.exports = {
     getFBN: function(callback) {
         scrapeFBN(articles => {
             articles.array.forEach(element => {
-                element.date = today();
+                element.date = formatDate();
                 element.saved = false;
             });
             Article.collection.insertMany(articles, {ordered:false}, 
@@ -28,7 +29,9 @@ module.exports = {
     },
 
     delete: function(item, callback) {
-        Article.remove(item, callback);
+        Article.remove({
+            _id: item._id
+            }, callback);
     },
 
     get: function(query, callback) {
