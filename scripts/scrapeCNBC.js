@@ -7,65 +7,55 @@ const scrapeCNBC = callback => {
   axios.get("https://www.cnbc.com/").then(function(response) {
   
     const $ = cheerio.load(response.data);
-    
     let results = [];
     
+    // get the lead headline
     $("div.HeroLedePlusThreeLeadItem-content").each(function(i, element) {
-      
-      var title = $(element)
+      var headline = $(element)
                     .find("h2")
                     .text();
       var link = $(element)
                     .find("h2")
                     .find("a")
                     .attr("href");
-                    
       results.push({
-        title: title,
+        headline: headline,
         link: link
       });
     });
   
-  
+    // Get the top three headlines after the lead headline
     $("div.HeroLedePlusThreeDeckItem-descriptionContainer").each(function(i, element) {
-      
-      // featured stories 
-      var title = $(element)
+      var headline = $(element)
                     .find("a")
                     .text();
       var link = $(element)
                     .find("a")
                     .attr("href");
-  
       results.push({
-        title: title,
+        headline: headline,
         link: link
       });
     });
   
-    
+    // Get more headlines, the next 15 stories appear above the "MARKETS" section 
     $("div.Card-titleContainer").each(function(i, element) {
-  
-  
-      // The top 15 stories appear above the "MARKETS" section 
       if ( i < 15) {
-  
-        var title = $(element)
+        var headline = $(element)
                       .find("div")
                       .text();
         var link = $(element)
                       .find("a")
                       .attr("href");
-  
         results.push({
-          title: title,
+          headline: headline,
           link: link
         });
-      console.log(`i: ${i}, title: ${title}`)
-    };
+      };
     });
   
-    // After looping through each h4.headline-link, log the results
-    console.log(results);
+    callback(results);
   });
-}
+};
+
+module.exports = scrapeCNBC;
