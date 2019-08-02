@@ -14,15 +14,15 @@ module.exports = {
             _articleId: data._id,
             date: foramtDate(),
             message: data.message
-        }
-        Note.create(newNote, function(error, doc)
+        };
+        Note.create(newNote, (error, doc) => {
             if (error) {
                 console.log(error);
             } else {
                 console.log(`note added ${doc}`)
                 callback(doc);
             }
-        )
+        });
     },
 
     delete: function(item, callback) {

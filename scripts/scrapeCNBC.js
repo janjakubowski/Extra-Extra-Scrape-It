@@ -1,5 +1,6 @@
 var cheerio = require("cheerio");
 var axios = require("axios");
+var cheerio = require("cheerio");
 
 const scrapeCNBC = callback => {
   

@@ -11,6 +11,7 @@ var NoteSchema = new Schema({
   },
   message: {
     type: String
+  }
 });
 
 var Note = mongoose.model("Note", NoteSchema);

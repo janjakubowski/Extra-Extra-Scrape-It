@@ -1,7 +1,7 @@
 const scrapeCNBC = require("../scripts/scrapeCNBC");
 const scrapeFBN = require("../scripts/scrapeFBN");
-const articleController = require("../controllers/article");
-const noteController = require("../controllers/note");
+const articleController = require("../controllers/articles");
+const noteController = require("../controllers/notes");
 
 
 module.exports = router => {
@@ -50,7 +50,7 @@ module.exports = router => {
         articleController.delete( query, (error, data) => res.json(data) );
     });
 
-    router.fix("/api/articles", (req, res) => {
+    router.patch("/api/articles", (req, res) => {
         articleController.update( req.body, (error, data) => res.json(data) );
     });
     
