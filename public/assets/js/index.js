@@ -15,8 +15,8 @@ function initPage() {
 function renderArticles(articles) {
     let articleDisplay = [];
     articles.array.forEach( article =>  
-        articleDisplay.push(createItem(article));
-    )
+        articleDisplay.push(createItem(article))
+    );
 };
 
 function createItem(article) {
@@ -33,13 +33,25 @@ function renderEmpty() {
     articleContainer.append(emptyMessage);
 };
 
+function handleScrapeCnbc() {
+    $.get("/api/fetchCNBC")
+        .then( data => {
+            console.log("got the datar");
+            // if (data && data.length) {
+            //     renderArticles(data);
+            // } else {
+            //     renderEmpty();
+            // };
+        });
+};
+
 $(document).ready( () => {
 
     const articleContainer = $(".article-container");
 
-    $(document).on("click", "btn.save", handleArticleSave);
-    $(document).on("click", "btn.scrape-cnbc", handleScrapeCnbc);
-    $(document).on("click", "btn.scrape-fbn", handleScrapeFbn);
+    // $(document).on("click", "btn.save", handleArticleSave);
+    $(".scrape-cnbc").on("click", handleScrapeCnbc);
+    // $(document).on("click", "btn.scrape-fbn", handleScrapeFbn);
 
     
 

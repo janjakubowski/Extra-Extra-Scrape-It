@@ -1,0 +1,27 @@
+<div class="jumbotron text-center">
+    
+
+    <div class="banner">
+        {{#if home}}
+            <h1>All The Financial News That's Fit To Read</h1>
+        {{else}}
+            <h1>Some Saved Financial News That's Fit To Read</h1>
+        {{/if}}
+        <h5>From your friends at:</h5>
+        <h4>CNBC and Fox Business Network</h4>
+    </div>
+    {{!-- <li><a href="/saved">Saved Articles</a></li>
+			<li><a class="btn btn-default scrape-cnbc">Scrape CNBC</a></li>
+			<li><a class="btn btn-default scrape-fbn">Scrape Fox Biz</a></li> --}}
+    {{#if home}}
+        <a href="/saved">
+            <button class="btn btn-success float-left">Saved Articles</button>
+        </a>
+        <button class="btn btn-primary float-right scrape-fbn">Scrape FBN</button>
+        <button class="btn btn-primary float-right scrape-cnbc">Scrape CNBC</button>
+    {{else}}
+        <a href="/">
+            <button class="btn btn-success float-left">Home Page</button>
+        </a>
+    {{/if}}
+</div>

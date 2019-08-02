@@ -1,8 +1,8 @@
 var cheerio = require("cheerio");
 var axios = require("axios");
-var cheerio = require("cheerio");
 
 const scrapeCNBC = callback => {
+  console.log("scrape called");
   
   // Making a request via axios for `cnbc.com`'s homepage
   axios.get("https://www.cnbc.com/").then(function(response) {
@@ -55,6 +55,7 @@ const scrapeCNBC = callback => {
       };
     });
   
+    console.log(results);
     callback(results);
   });
 };

@@ -17,7 +17,7 @@ module.exports = router => {
 
     // scrape cnbc.com
     router.get("/api/fetchCNBC", (req, res) => {
-        articleController.fetchCNBC( (error, docs) => {
+        articleController.getCNBC( (error, docs) => {
             if (!docs) {
                 res.json({message: `No new articles found at cnbc.com, try again later`});
             } else {

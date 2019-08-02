@@ -1,6 +1,5 @@
 const express = require("express");
 // const logger = require("morgan");
-const expressHandlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 
 const mongoose = require("mongoose");
@@ -9,8 +8,8 @@ const mongoose = require("mongoose");
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
-const axios = require("axios");
-const cheerio = require("cheerio");
+// const axios = require("axios");
+// const cheerio = require("cheerio");
 
 // Require all models
 const db =   process.env.MOGODB_URI || "mongodb://localhost/extraExtraFinancials";
@@ -31,7 +30,7 @@ app.use(express.static("public"));
 
 // Setup handlebars
 var exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs( {defaultLayout: "main"} ));
 app.set("view engine", "handlebars");
 
 
@@ -45,7 +44,8 @@ app.use(router);
 // routes(app,path);
 
 // Connect to the Mongo DB
-mongoose.connect(db, { useNewUrlParser: true }, error => {
+mongoose.set('useCreateIndex', true);
+mongoose.connect(db, { useNewUrlParser: true },error => {
   if (error) {
     console.log(error);
   } else {
@@ -54,7 +54,7 @@ mongoose.connect(db, { useNewUrlParser: true }, error => {
 });
 
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 2608
 // Start the server
 app.listen(PORT, function() {
   console.log(`App running on port ${PORT} !`);
