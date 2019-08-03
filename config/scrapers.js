@@ -6,10 +6,10 @@ const formatDate = require("../scripts/formatDate")
 const db = require("../models");
 
 
-module.exports = router => {
+module.exports = function(app) {
 
     // scrape cnbc.com
-    router.get("/api/fetchCNBC", (req, res) => {
+    app.get("/api/fetchCNBC", (req, res) => {
 
       	axios.get("https://www.cnbc.com/").then(function(response) {
 
@@ -88,14 +88,14 @@ module.exports = router => {
 					});
 			  };
 			});
-			res.json({ message: "scrape complete"});
-			// res.send("Scrape complete");
+			// res.json({ message: "scrape complete"});
+			res.send("Scrape complete");
 		});
     });
 
 
     // scrape foxbuiness.com
-    // router.get("/api/fetchFBN", (req, res) => {
+    // app.get("/api/fetchFBN", (req, res) => {
     //     articleController.fetchFBN( (error, docs) => {
     //         if (!docs) {
     //             res.json({message: `No articles found at foxbusiness.com, try again later`});

@@ -56,7 +56,8 @@ $(document).ready( function() {
         });
     });
 
-    $("document").on("click", "#scrape-cnbc", function() {
+    $("#scrapeCnbc").on("click", function() {
+        console.log("in index.js ready to do ajax")
         $.ajax({
             method: "GET",
             url: "/api/fetchCNBC"
