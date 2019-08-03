@@ -11,9 +11,6 @@ const mongoose = require("mongoose");
 // const axios = require("axios");
 // const cheerio = require("cheerio");
 
-// Require all models
-const db =   process.env.MOGODB_URI || "mongodb://localhost/extraExtraFinancials";
-
 // Initialize Express
 const app = express();
 
@@ -47,15 +44,16 @@ app.set("view engine", "handlebars");
 // const routes = require("./routes/route-index.js");
 // routes(app,path);
 // router.post("/articles/:id", function(req, res) {
-//   saveId = req.parms.id;
-//   db.Article.update({_id:saveId}, {$set: { saved: true }});
-//   res.json(`${saveId} updated`);
-// });
-
-// Connect to the Mongo DB
-mongoose.set('useCreateIndex', true);
-mongoose.connect(db, { useNewUrlParser: true },error => {
-  if (error) {
+  //   saveId = req.parms.id;
+  //   db.Article.update({_id:saveId}, {$set: { saved: true }});
+  //   res.json(`${saveId} updated`);
+  // });
+  
+  // Connect to the Mongo DB
+  const db =   process.env.MONGODB_URI || "mongodb://localhost/extraExtraFinancials";
+  mongoose.set('useCreateIndex', true);
+  mongoose.connect(db, { useNewUrlParser: true },error => {
+    if (error) {
     console.log(error);
   } else {
     console.log("mongodb connection is successful !!"); 
