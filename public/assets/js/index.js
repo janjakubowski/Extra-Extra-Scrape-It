@@ -48,7 +48,7 @@ $(document).ready( function() {
         let saveId = $(this).attr("data-id");
         console.log(`saveId: ${saveId}`);
         $.ajax({
-            method: "PUT",
+            method: "POST",
             url: "/articles/" + saveId
             })
         .then(function(data) {

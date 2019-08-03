@@ -37,6 +37,10 @@ body, html {
   color: black;
 }
 
+a {
+  font-size: 1.25em;
+}
+
 
       /* body { background-color: #F2F6D0 }
       #wrapper {
