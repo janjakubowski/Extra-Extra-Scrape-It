@@ -1,0 +1,31 @@
+
+<div class="article-container">
+
+	{{#each articles}}
+
+		{{#if saved}}
+
+			<div class="row article-row">
+				<div class="col-md-1"></div>
+				<div class="col-md-9">
+					<a href="{{link}}" target="_blank">
+						{{headline}}
+					</a>
+				</div>
+				<div class="col-md-1">
+					<button class="save-it btn-success btn" data-id="{{_id}}">
+						Save
+					</button>
+				</div>
+				<div class="col-md-1">
+					<button class="note-it btn-primary btn" data-id="{{_id}}">
+						Add Note
+					</button>
+				</div>
+
+			</div>
+
+		{{/if}}
+
+	{{/each}}
+

@@ -29,6 +29,14 @@ body, html {
   margin: auto 0.5em
 }
 
+.article-row {
+  margin: 0 0 15 0 !important;
+  background-color: blanchedalmond;
+  opacity: 0.9;
+  /* text-emphasis: bold; */
+  color: black;
+}
+
 
       /* body { background-color: #F2F6D0 }
       #wrapper {

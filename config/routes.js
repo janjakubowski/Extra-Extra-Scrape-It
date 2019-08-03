@@ -1,48 +1,80 @@
-const scrapeCNBC = require("../scripts/scrapeCNBC");
-const scrapeFBN = require("../scripts/scrapeFBN");
-const articleController = require("../controllers/articles");
-const noteController = require("../controllers/notes");
+// const scrapeCNBC = require("../scripts/scrapeCNBC");
+// const scrapeFBN = require("../scripts/scrapeFBN");
+// const articleController = require("../controllers/articles");
+// const noteController = require("../controllers/notes");
+// const express = require("express");
+// const router = express.Router();
+const db = require("../models");
 
 
-module.exports = router => {
+module.exports = function(router) {
+
     // default home page
-    router.get("/", (req, res) => 
-        res.render(("index"))
-    );
+    router.get("/", (req, res) => {
+        db.Article.find({})
+        .then( dbArticle => {
+            var handlebarsObject = {
+                articles: dbArticle
+            };
+            console.log(handlebarsObject);
+            res.render("index", handlebarsObject);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          res.json(err);
+        });
+    });
     
     // saved articles page
-    router.get("/saved", (req, res) => 
-        res.render(("saved"))
-    );
+    router.get("/saved", (req, res) => {
+        db.Article.find({ saved: true })
+            .then( dbArticle => {
+                var handlebarsObject = {
+                    articles: dbArticle
+                };
+                console.log(handlebarsObject);
+                res.render("saved", handlebarsObject);
+                })
+            .catch(function(err) {
+            // If an error occurred, send it to the client
+                res.json(err);
+                });
+    });
+
+    // router.post("/articles/:id", function(req, res) {
+    //     saveId = req.parms.id;
+    //     db.Article.update({_id:saveId}, {$set: { saved: true }});
+    //     res.json(`${saveId} updated`);
+    // });
 
     // scrape cnbc.com
-    router.get("/api/fetchCNBC", (req, res) => {
-        articleController.getCNBC( (error, docs) => {
-            if (!docs) {
-                res.json({message: `No new articles found at cnbc.com, try again later`});
-            } else {
-                res.json({message: `Added ${docs.insertedCount} new articles`})
-            }
-        });
-    });
+    // router.get("/api/fetchCNBC", (req, res) => {
+    //     articleController.getCNBC( (error, docs) => {
+    //         if (!docs) {
+    //             res.json({message: `No new articles found at cnbc.com, try again later`});
+    //         } else {
+    //             res.json({message: `Added ${docs.insertedCount} new articles`})
+    //         }
+    //     });
+    // });
 
     // scrape foxbuiness.com
-    router.get("/api/fetchFBN", (req, res) => {
-        articleController.fetchFBN( (error, docs) => {
-            if (!docs) {
-                res.json({message: `No articles found at foxbusiness.com, try again later`});
-            } else {
-                res.json({message: `Added ${docs.insertedCount} new articles`})
-            }
-        });
-    });
+    // router.get("/api/fetchFBN", (req, res) => {
+    //     articleController.fetchFBN( (error, docs) => {
+    //         if (!docs) {
+    //             res.json({message: `No articles found at foxbusiness.com, try again later`});
+    //         } else {
+    //             res.json({message: `Added ${docs.insertedCount} new articles`})
+    //         }
+    //     });
+    // });
 
     // populate articles page from database
-    router.get("/api/articles", (req, res) => {
-        let query = {};     // if user specified which articles use it, otherwise get all
-        if (req.query.saved) { query = req.query };
-        articleController.get( query, data => res.json(data) );
-    });
+    // router.get("/api/articles", (req, res) => {
+    //     let query = {};     // if user specified which articles use it, otherwise get all
+    //     if (req.query.saved) { query = req.query };
+    //     articleController.get( query, data => res.json(data) );
+    // });
 
     router.delete("/api/articles/:id", (req, res) => {
         let query = {};
