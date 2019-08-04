@@ -1,48 +1,4 @@
-// const isHomePage = true;
-
-// function initPage() {
-//     articleContainer.empty();
-//     $.get("/api/articles/saved=false")
-//         .then( data => {
-//             if (data && data.length) {
-//                 renderArticles(data);
-//             } else {
-//                 renderEmpty();
-//             };
-//         });
-// };
-
-// function renderArticles(articles) {
-//     let articleDisplay = [];
-//     articles.array.forEach( article =>  
-//         articleDisplay.push(createItem(article))
-//     );
-// };
-
-// function createItem(article) {
-//     var item = $([ 
-//         "<div>",
-
-//         "</div>"
-
-//     ]);
-// };
-
-// function renderEmpty() {
-//     const emptyMessage = "<h1>no existing articles</h1>";
-//     articleContainer.append(emptyMessage);
-// };
-
-// function handleScrapeCnbc() {
-//     $.get("/api/fetchCNBC")
-//         .then( () => {
-//             console.log("completed");
-//         });
-// };
-
 $(document).ready( function() {
-
-    // const articleContainer = $(".article-container");
 
     $(document).on("click", ".save-it", function(e) {
         let saveId = $(this).attr("data-id");
@@ -57,16 +13,40 @@ $(document).ready( function() {
     });
 
     $("#scrapeCnbc").on("click", function() {
-        console.log("in index.js ready to do ajax")
         $.ajax({
             method: "GET",
             url: "/api/fetchCNBC"
             })
-        .then(function(message) {
-            console.log(`${message}`);
-            })
+        .done(function(res) {
+            if (res.success) {
+                window.location.reload();
+            }
+        });
     });
-    // $(document).on("click", "btn.scrape-fbn", handleScrapeFbn);
+
+    $("#scrapeFBN").on("click", function() {
+        $.ajax({
+            method: "GET",
+            url: "/api/fetchFBN"
+            })
+        .done(function(res) {
+            if (res.success) {
+                window.location.reload();
+            }
+        });
+    });
+
+    $("#scrapedClear").on("click", function() {
+        $.ajax({
+            method: "DELETE",
+            url: "/articles/"
+            })
+        .done(function(res) {
+            if (res.success) {
+                window.location.reload();
+            }
+        });
+    });
 
     
 
