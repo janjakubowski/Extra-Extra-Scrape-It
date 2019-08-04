@@ -6,7 +6,6 @@ module.exports = function(app) {
     // ////////////////////////////////////
     // default home page - unsaved articles
     app.get("/", (req, res) => {
-
         db.Article.find({ saved: false })
         .then( dbArticles => {
             var handlebarsObject = {
@@ -23,7 +22,6 @@ module.exports = function(app) {
     // ///////////////////
     // saved articles page
     app.get("/saved", (req, res) => {
-
         db.Article.find({ saved: true })
             .then( dbArticles => {
                 var handlebarsObject = {
@@ -66,10 +64,12 @@ module.exports = function(app) {
     // ///////////////////////////////////////////////
     // delete a saved article from the collection
     app.delete("/saved/:id", (req, res) => {
-
-        db.Article.deleteOne({ _id: req.params.id }, function (err) {
-            if (err) return err;
-        });
+        console.log("delete id: " + req.params.id);
+        db.Article.deleteOne(
+            { _id: req.params.id }, 
+            function (err) {
+                if (err) return err;
+            });
     });
 
     app.patch("/api/articles", (req, res) => {
