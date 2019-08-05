@@ -2,14 +2,17 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
+    source: {
+        type: String
+    },
     headline: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     link: {
         type: String,
         required: true,
+        unique: true
     },
     date: {
         type: String
@@ -18,8 +21,9 @@ var ArticleSchema = new Schema({
         type: Boolean,
         default: false
     },
-    source: {
-        type: String
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
     }
 
 });

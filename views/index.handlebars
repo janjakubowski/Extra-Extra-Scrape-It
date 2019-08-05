@@ -1,37 +1,39 @@
+<div class="container">
 
   {{> header home=true }}
 
-  <div class="container article-container">
+    <div class="display-row">
+  {{#each articles}}
 
-    {{#each articles}}
+    {{#unless saved}}
 
-      {{#unless saved}}
 
-        <div class="row article-row">
+      <div class="row">
 
-          <div class="col-md-1">
-            <p>{{source}}</p>
-          </div>
-
-          <div class="col-md-9">
-            <a href="{{link}}" target="_blank">
-              {{headline}}
-            </a>
-          </div>
-
-          <div class="col-md-2">
-            <button class="save-it btn-success btn" data-id="{{_id}}">
-              Save
-            </button>
-          </div>
-
+        <div class="col-md-1">
+          <p>{{source}}</p>
         </div>
 
-      {{/unless}}
+        <div class="col-md-9">
+          <a href="{{link}}" target="_blank">
+            {{headline}}
+          </a>
+        </div>
 
-    {{/each}}
+        <div class="col-md-2">
+          <button class="save-it btn-success btn" data-id="{{_id}}">
+            Save
+          </button>
+        </div>
 
-  </div>
+      </div>
+
+    {{/unless}}
+
+  {{/each}}
+    </div>
+
+</div>
   
 
 

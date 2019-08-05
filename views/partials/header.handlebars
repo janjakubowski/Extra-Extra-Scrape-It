@@ -10,15 +10,13 @@
         <h5>From your friends at:</h5>
         <h4>CNBC and Fox Business Network</h4>
     </div>
-    {{!-- <li><a href="/saved">Saved Articles</a></li>
-			<li><a class="btn btn-default scrape-cnbc">Scrape CNBC</a></li>
-			<li><a class="btn btn-default scrape-fbn">Scrape Fox Biz</a></li> --}}
+
     {{#if home}}
         <a href="/saved">
             <button class="btn btn-success float-left">Saved Articles</button>
         </a>
         <button class="btn btn-warning float-right" id="scrapedClear">Clear Scraped</button>
-        <button class="btn btn-primary float-right" id="scrapeFBN">Scrape FBN</button>
+        <button class="btn btn-primary float-right" id="scrapeFbn">Scrape FBN</button>
         <button class="btn btn-primary float-right" id="scrapeCnbc">Scrape CNBC</button>
     {{else}}
         <a href="/">

@@ -1,38 +1,42 @@
-<div class="container">
 
-  {{> header home=false }}
+{{> header home=false }}
 
-<div class="article-container">
+{{#each articles}}
 
-	{{#each articles}}
+	{{#if saved}}
 
-		{{#if saved}}
+	<div class="container article" >
 
-			<div class="row article-row">
-				<div class="col-md-1"></div>
-				<div class="col-md-9">
-					<a href="{{link}}" target="_blank">
-						{{headline}}
-					</a>
-				</div>
-				<div class="col-md-1">
-					<button class="note-it btn-primary btn" data-id="{{_id}}">
-						Note
-					</button>
-				</div>
-				<div class="col-md-1">
-					<button class="delete-it btn-danger btn" data-id="{{_id}}">
-						Delete
-					</button>
-				</div>
+		<div class="row">
 
+			<div class="col-md-1">
+				<p>{{source}}</p>
+			</div>
+			<div class="col-md-9">
+				<a href="{{link}}" target="_blank">
+					{{headline}}
+				</a>
+			</div>
+			<div class="col-md-1">
+				<button class="note-it btn-primary btn" data-id="{{_id}}">
+					Note
+				</button>
+			</div>
+			<div class="col-md-1">
+				<button class="delete-it btn-danger btn" data-id="{{_id}}">
+					Delete
+				</button>
 			</div>
 
-		{{/if}}
+		</div>
 
-	{{/each}}
+	</div>
+	{{/if}}
+
+{{/each}}
+
+{{> modals }}
   
-</div>
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

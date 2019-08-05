@@ -1,34 +1,42 @@
 <div class="modal fade" id="modalNotes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
-      <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <div class="modal-dialog modal-lg modal-notify modal-primary" role="document">
         <div class="modal-content text-center">
           <div class="modal-header d-flex justify-content-center">
-            <p class="heading">Add A Train</p>
+            <h3 class="heading">Add A Note</h3>
           </div>
           <!--Body-->
           <div class="modal-body">
-              <form class="train-info-form">
-                  <div class="form-group">
-                    <label for="train-route-input">Train Name</label>
-                    <input  id="train-route-input" class="form-control" placeholder="Polar Express" type="text">
+            {{#each notes}}
+              <div class="container">
+
+                <div class="row">
+                  <div class="col-md-10">
+                    <h5>
+                      {{message}}
+                    </h5>
                   </div>
-                  <div class="form-group">
-                    <label for="train-origin-input">Train Origin</label>
-                    <input  id="train-origin-input" class="form-control" placeholder="North Pole" type="text">
+                  <div class="col-md-2">
+                    <button class="delete-note btn-danger btn" data-id="{{_id}}">
+                      Save
+                    </button>
                   </div>
-                  <div class="form-group">
-                    <label for="train-next-arrival-input">Next Train Arrives At</label>
-                    <input  id="train-next-arrival-input" class="form-control" placeholder="23:59 (24-hr clock)" type="text">
-                  </div>
-                  <div class="form-group">
-                    <label for="train-interval-input">Frequency</label>
-                    <input  id="train-interval-input" class="form-control" placeholder="in minutes" type="text">
-                  </div>
-              </form>
+                </div>
+
+              </div>
+            {{/each}}
+
+            <form class="add-note-form">
+                <div class="form-group">
+                  <label for="noteTxt">Note</label>
+                  <input  id="noteTxt" class="form-control" placeholder="Comment" type="text">
+                </div>
+            </form>
+
           </div>
           <!--Footer-->
           <div class="modal-footer flex-center">
-            <button class="btn btn-primary waves-effect" data-dismiss="modal" id="add-train-btn">Submit</button>
+            <button class="btn btn-primary waves-effect" data-dismiss="modal" id="addNote">Submit</button>
             <button class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
           </div>
         </div>

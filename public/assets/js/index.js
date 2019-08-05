@@ -1,6 +1,6 @@
 $(document).ready( function() {
 
-    $(document).on("click", ".save-it", function(e) {
+    $(document).on("click", ".save-it", function() {
         let saveId = $(this).attr("data-id");
         console.log(`saveId: ${saveId}`);
         $.ajax({
@@ -24,7 +24,7 @@ $(document).ready( function() {
         });
     });
 
-    $("#scrapeFBN").on("click", function() {
+    $("#scrapeFbn").on("click", function() {
         $.ajax({
             method: "GET",
             url: "/api/fetchFBN"

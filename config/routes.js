@@ -1,4 +1,5 @@
 const mongojs = require("mongojs");
+const formatDate = require("../scripts/formatDate")
 const db = require("../models");
 
 module.exports = function(app) {
@@ -72,23 +73,36 @@ module.exports = function(app) {
             });
     });
 
-    app.patch("/api/articles", (req, res) => {
-        articleController.update( req.body, (error, data) => res.json(data) );
-    });
-    
-    app.get("/api/notes/:article_id?", (req, res) => {
-        let query = {};     // if user specified an existing note use it, otherwise get all
-        if (req.parms.article_id) { query._id = req.parms.article_id };
-        noteController.get( query, (error, data) => res.json(data) );
-    });
-    
-    app.delete("/api/notes/:id", (req, res) => {
-        let query = {};
-        query._id = req.parms.id;
-        noteController.delete( query, (error, data) => res.json(data) );
+    // ///////////////////////////////////////////////
+    // delete a saved article from the collection
+    app.post("/api/notes", (req, res) => {
+        console.log(req.body);
+        // let today = formatDate();
+        // db.Note.create({
+        //     _articleId: req.body.articleId,
+        //     date: today,
+        //     message: req.body.message
+        // })
+        // .then(function(dbNote) {
+        //     console.log(dbNote);
+        //     res.json({ success: true });
+        // })
+        // .catch(function(error) {
+        //     console.log(`Oops, ${error}`);
+        //     res.json({ success: false });
+        // });
+        
     });
 
-    app.post("/api/notes", (req, res) => {
-        noteController.save(req.body, data => res.json(data) )
+    // Route for grabbing a specific Article by id, populate it with it's note
+    app.get("/api/articles/:id", function(req, res) {
+        db.Article.findOne({ _id: req.params.id })
+        .populate("note")
+        .then(function(item) {
+            res.json(item);
+        })
+        .catch(function(error) {
+            res.json(error);
+        });
     });
 }
