@@ -40,6 +40,14 @@ a {
   /* text-emphasis: bold; */
 }
 
+.add-note-form {
+  width: 80%;
+  margin-top: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.25em;
+}
+
 .article {
   margin: 0 0 25 0 !important;
   padding: 0 0 50 0;

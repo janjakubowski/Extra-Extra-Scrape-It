@@ -2,42 +2,36 @@
       aria-hidden="true">
       <div class="modal-dialog modal-lg modal-notify modal-primary" role="document">
         <div class="modal-content text-center">
+
           <div class="modal-header d-flex justify-content-center">
-            <h3 class="heading">Add A Note</h3>
+            <h3>Add A Note to ...</h3>
           </div>
-          <!--Body-->
-          <div class="modal-body">
-            {{#each notes}}
-              <div class="container">
 
-                <div class="row">
-                  <div class="col-md-10">
-                    <h5>
-                      {{message}}
-                    </h5>
-                  </div>
-                  <div class="col-md-2">
-                    <button class="delete-note btn-danger btn" data-id="{{_id}}">
-                      Save
-                    </button>
-                  </div>
-                </div>
+          <div class="modal-body container">
 
-              </div>
-            {{/each}}
+            <h5 id="modalHeadline">=</h5>
 
             <form class="add-note-form">
                 <div class="form-group">
-                  <label for="noteTxt">Note</label>
-                  <input  id="noteTxt" class="form-control" placeholder="Comment" type="text">
+                  <input id="noteTxt" class="form-control" placeholder="Comment" type="text">
                 </div>
             </form>
 
           </div>
-          <!--Footer-->
+         
           <div class="modal-footer flex-center">
-            <button class="btn btn-primary waves-effect" data-dismiss="modal" id="addNote">Submit</button>
-            <button class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            <button class="submit-note btn btn-primary waves-effect" data-dismiss="modal">
+              test
+            </button>
+            {{!-- <button class="update-note btn btn-primary waves-effect" data-dismiss="modal">
+              Update
+            </button> --}}
+            <button class="delete-note btn-warning btn" data-dismiss="modal">
+              Delete
+            </button>
+            <button class="btn btn-danger waves-effect" data-dismiss="modal">
+              Cancel
+            </button>
           </div>
         </div>
       </div>

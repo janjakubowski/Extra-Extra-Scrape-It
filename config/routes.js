@@ -65,37 +65,43 @@ module.exports = function(app) {
     // ///////////////////////////////////////////////
     // delete a saved article from the collection
     app.delete("/saved/:id", (req, res) => {
-        console.log("delete id: " + req.params.id);
-        db.Article.deleteOne(
-            { _id: req.params.id }, 
-            function (err) {
-                if (err) return err;
-            });
+        db.Article.findById(req.params.id)
+            .then(function(dbArticle){
+                var noteId = dbArticle.note;
+                return db.Note.findByIdAndRemove(noteId);
+            }).then(
+                function(){
+                    res.json({ "message": "success" })
+                })
+            .catch(function(err){
+                res.json(err);
+    })
     });
 
     // ///////////////////////////////////////////////
-    // delete a saved article from the collection
-    app.post("/api/notes", (req, res) => {
-        console.log(req.body);
-        // let today = formatDate();
-        // db.Note.create({
-        //     _articleId: req.body.articleId,
-        //     date: today,
-        //     message: req.body.message
-        // })
-        // .then(function(dbNote) {
-        //     console.log(dbNote);
-        //     res.json({ success: true });
-        // })
-        // .catch(function(error) {
-        //     console.log(`Oops, ${error}`);
-        //     res.json({ success: false });
-        // });
+    // save a saved article from the collection
+    app.post("/saved/:id", (req, res) => {
+
         
+        console.log(`id: ${req.params.id} | body: ${JSON.stringify(req.body)}`);
+        let today = formatDate();
+        db.Note.create({
+            date: today,
+            message: req.body.message
+        })
+        .then( dbNote => {
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+        })
+        .then( dbArticle => {
+            res.json( dbArticle );
+        })
+        .catch( error => { 
+            res.json(error); 
+        });
     });
 
     // Route for grabbing a specific Article by id, populate it with it's note
-    app.get("/api/articles/:id", function(req, res) {
+    app.get("/articles/:id", function(req, res) {
         db.Article.findOne({ _id: req.params.id })
         .populate("note")
         .then(function(item) {
@@ -105,4 +111,7 @@ module.exports = function(app) {
             res.json(error);
         });
     });
+
+
+    
 }

@@ -1,41 +1,41 @@
+<div class="container">
+	{{> header home=false }}
 
-{{> header home=false }}
+	{{#each articles}}
 
-{{#each articles}}
+		{{#if saved}}
 
-	{{#if saved}}
+		<div class="article" >
 
-	<div class="container article" >
+			<div class="row">
 
-		<div class="row">
+				<div class="col-md-1">
+					<p>{{source}}</p>
+				</div>
+				<div class="col-md-9">
+					<a href="{{link}}" target="_blank">
+						{{headline}}
+					</a>
+				</div>
+				<div class="col-md-2">
+					<button class="note-it btn-sm btn-primary btn" data-id="{{_id}}">
+						Note
+					</button>
+					<button class="delete-it btn-sm btn-danger btn" data-id="{{_id}}">
+						Delete
+					</button>
+				</div>
 
-			<div class="col-md-1">
-				<p>{{source}}</p>
-			</div>
-			<div class="col-md-9">
-				<a href="{{link}}" target="_blank">
-					{{headline}}
-				</a>
-			</div>
-			<div class="col-md-1">
-				<button class="note-it btn-primary btn" data-id="{{_id}}">
-					Note
-				</button>
-			</div>
-			<div class="col-md-1">
-				<button class="delete-it btn-danger btn" data-id="{{_id}}">
-					Delete
-				</button>
 			</div>
 
 		</div>
+		{{/if}}
 
-	</div>
-	{{/if}}
+	{{/each}}
 
-{{/each}}
+	{{> modals }}
 
-{{> modals }}
+</div>
   
 
 <script src="https://code.jquery.com/jquery.js"></script>

@@ -16,56 +16,54 @@ $(document).ready( function() {
     
     $(document).on("click", ".note-it", function() {
 
+        var articleId = $(this).attr("data-id");
 
-        console.log("ROUTING IT !!!");
-    
-    //     var articleId = $(this).attr("data-id");
+        // Now make an ajax call for the Article
+        $.ajax({
+            method: "GET",
+            url: "/articles/" + articleId
+        })
+        .then(function(data) {
+            console.log(JSON.stringify(data));
+        
+            $("#modalHeadline").text(data.headline);
 
-    //     // Now make an ajax call for the Article
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "/articles/" + articleId
-    //     })
-    //         // With that done, add the note information to the page
-    //         .then(function(data) {
-    //         console.log(data);
-    //         // The title of the article
-    //         $("#notes").append("<h2>" + data.title + "</h2>");
-    //         // An input to enter a new title
-    //         $("#notes").append("<input id='titleinput' name='title' >");
-    //         // A textarea to add a new note body
-    //         $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
-    //         // A button to submit a new note, with the id of the article saved to it
-    //         $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+            if (data.note) {
+                $(".submit-note").text("Update Note");
+                $(".submit-note").attr("data-id",data.note._id);
+                $(".submit-note").show();
+                $(".delete-note").attr("data-id",data._id);
+                $(".delete-note").show();
+                $("#noteTxt").val(data.note.message);
+            } else {
+                $(".submit-note").text("Add Note");
+                $(".submit-note").attr("data-id",data._id);
+                $(".submit-note").show();
+                $(".delete-note").hide();
+                $("#noteTxt").val("");
+            };
+            $("#modalNotes").modal("show");
+        });
+    });
 
-    //         // If there's a note in the article
-    //         if (data.note) {
-    //             // Place the title of the note in the title input
-    //             $("#titleinput").val(data.note.title);
-    //             // Place the body of the note in the body textarea
-    //             $("#bodyinput").val(data.note.body);
-    //         }
-    //         });
-    // });
-
-    // $("#addNote").on("click", function(e) {
+    $(".submit-note").on("click", function(e) {
   
-    //     e.preventDefault();
-    //     let articleId = $(this).attr("data-id");
-    //     let message = $("#noteTxt").val().trim();
+        e.preventDefault();
 
-    //     $.ajax({
-    //         method: "POST",
-    //         url: "/api/notes",
-    //         data: {
-    //             articleId,
-    //             message
-    //             }
-    //         })
-    //     .done(function(res) {
-    //         if (res.success) {
-    //             window.location.reload();
-    //         };
-    //     });
+        let articleId = $(this).attr("data-id");
+        let message = $("#noteTxt").val().trim();
+
+        $.ajax({
+            method: "POST",
+            url: "/saved/" + articleId,
+            data: {
+                message
+                }
+            })
+        .done(function(res) {
+            if (res.success) {
+                window.location.reload();
+            };
+        });
     });
 });
